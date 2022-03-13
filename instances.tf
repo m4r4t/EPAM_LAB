@@ -36,7 +36,7 @@ resource "aws_instance" "web" {
   subnet_id              = aws_subnet.master_public_subnets[0].id
   vpc_security_group_ids = [aws_security_group.default.id]
   tags = {
-      Name = "web"
+    Name = "web"
   }
 }
 
@@ -48,6 +48,6 @@ resource "aws_instance" "db" {
   subnet_id              = aws_subnet.master_private_subnets[0].id
   vpc_security_group_ids = [aws_security_group.default.id]
   tags = {
-      Name = "db"
+    Name = "db"
   }
 }

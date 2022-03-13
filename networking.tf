@@ -52,6 +52,7 @@ resource "aws_subnet" "master_public_subnets" {
 
   tags = {
     Name = "master_vpc_public_subnet_${count.index}_${data.aws_availability_zones.azs.names[count.index]}"
+    Tier = "Public"
   }
 }
 
@@ -65,6 +66,7 @@ resource "aws_subnet" "master_private_subnets" {
 
   tags = {
     Name = "master_vpc_private_subnet_${count.index}_${data.aws_availability_zones.azs.names[count.index]}"
+    Tier = "Private"
   }
 }
 
@@ -110,31 +112,4 @@ resource "aws_route_table_association" "private" {
   count          = length(var.master_private_subnets)
   subnet_id      = element(aws_subnet.master_private_subnets.*.id, count.index)
   route_table_id = aws_route_table.private.id
-}
-
-/*==== VPC's Default Security Group ======*/
-resource "aws_security_group" "default" {
-  provider    = aws.region-master-yalk
-  name        = "master-vpc-default-sg"
-  description = "Default security group to allow inbound/outbound from the VPC"
-  vpc_id      = aws_vpc.master.id
-  depends_on  = [aws_vpc.master]
-  ingress {
-    from_port = "22"
-    to_port   = "22"
-    protocol  = "tcp"
-    self      = false
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port = "0"
-    to_port   = "0"
-    protocol  = "-1"
-    self      = false
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "Master-SG-Default"
-  }
 }

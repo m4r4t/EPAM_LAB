@@ -31,6 +31,11 @@ variable "instance-type" {
   default = "t3.micro"
 }
 
+
+variable "server_port" {
+  type = number
+}
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 variable "acg_access_key" {
   type        = string
