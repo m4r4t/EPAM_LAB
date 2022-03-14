@@ -8,7 +8,7 @@ terraform {
   backend "s3" {
     region  = "eu-west-1"
     profile = "default"
-    key     = "terraformstatefile"
+    key     = "main_tfstate"
     bucket  = "epam-lab-tfstate-bucket"
   }
 }

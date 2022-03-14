@@ -36,6 +36,11 @@ variable "server_port" {
   type = number
 }
 
+variable "mysql_db_port" {
+  type    = number
+  default = 3306
+}
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 variable "acg_access_key" {
   type        = string

@@ -113,3 +113,27 @@ resource "aws_route_table_association" "private" {
   subnet_id      = element(aws_subnet.master_private_subnets.*.id, count.index)
   route_table_id = aws_route_table.private.id
 }
+
+
+data "aws_subnets" "public" {
+  filter {
+    name   = "vpc-id"
+    values = [aws_vpc.master.id]
+  }
+
+  tags = {
+    Tier = "Public"
+  }
+}
+
+
+data "aws_subnets" "private" {
+  filter {
+    name   = "vpc-id"
+    values = [aws_vpc.master.id]
+  }
+
+  tags = {
+    Tier = "Private"
+  }
+}
